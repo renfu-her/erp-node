@@ -1,5 +1,7 @@
 # erp-node
 
+## 安裝
+
 ```
 npm install
 npm run dev
@@ -8,6 +10,7 @@ npm run dev
 ## 資料庫
 
 ### 環境變數 .env
+
 ```
 DB_NAME=erp-node
 DB_USER=root
