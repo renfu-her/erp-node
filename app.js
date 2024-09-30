@@ -1,5 +1,6 @@
 // app.js
 const express = require("express");
+const initDb = require('./init-db');
 const path = require("path");
 const engine = require("ejs-mate");
 const cookieParser = require("cookie-parser");
@@ -61,8 +62,12 @@ app.use("/backend", hrRoutes);
 app.use("/backend", inventoryRoutes);
 app.use("/backend", accountingRoutes);
 
-// 啟動伺服器
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`伺服器運行於 http://localhost:${PORT}`);
-});
+// 初始化數據庫
+initDb().then(() => {
+    const PORT = process.env.PORT || 3000;
+    app.listen(PORT, () => {
+      console.log(`伺服器運行於 http://localhost:${PORT}`);
+    });
+  }).catch(err => {
+    console.error('伺服器啟動失敗:', err);
+  });

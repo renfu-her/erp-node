@@ -23,6 +23,8 @@ const Employee = sequelize.define('Employee', {
     type: DataTypes.ENUM('active', 'inactive'),
     defaultValue: 'active'
   }
+}, {
+  tableName: 'Employees'  // 明確指定表名
 });
 
 module.exports = Employee;

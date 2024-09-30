@@ -9,6 +9,8 @@ const Position = sequelize.define('Position', {
   description: {
     type: DataTypes.TEXT
   }
+}, {
+  tableName: 'Positions'  // 明確指定表名
 });
 
 module.exports = Position;

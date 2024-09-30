@@ -9,6 +9,8 @@ const Rule = sequelize.define('Rule', {
   description: {
     type: DataTypes.TEXT
   }
+}, {
+  tableName: 'Rules'  // 明確指定表名
 });
 
 module.exports = Rule;
