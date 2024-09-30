@@ -1,0 +1,45 @@
+<% layout('layouts/layout') %>
+
+<h2>勞保分級表</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>等級</th>
+      <th>薪資範圍</th>
+      <th>投保薪資</th>
+      <th>生效日期</th>
+      <th>操作</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% grades.forEach(grade => { %>
+      <tr>
+        <td><%= grade.grade %></td>
+        <td><%= grade.salary_range %></td>
+        <td><%= grade.insured_salary %></td>
+        <td><%= grade.start_date.toISOString().split('T')[0] %></td>
+        <td>
+          <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#editModal<%= grade.id %>">編輯</button>
+          <form action="/backend/hr/insurance-grades/<%= grade.id %>?_method=DELETE" method="POST" class="d-inline">
+            <button type="submit" class="btn btn-sm btn-danger">刪除</button>
+          </form>
+        </td>
+      </tr>
+    <% }); %>
+  </tbody>
+</table>
+
+<button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#createModal">新增分級</button>
+
+<!-- 新增分級模態框 -->
+<div class="modal fade" id="createModal" tabindex="-1">
+  <!-- 添加新增表單 -->
+</div>
+
+<!-- 編輯分級模態框 -->
+<% grades.forEach(grade => { %>
+  <div class="modal fade" id="editModal<%= grade.id %>" tabindex="-1">
+    <!-- 添加編輯表單 -->
+  </div>
+<% }); %>

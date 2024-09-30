@@ -63,7 +63,17 @@
                     <a class="nav-link" href="/user-management">使用者管理</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/hr-system">人事系統</a>
+                    <a class="nav-link dropdown-toggle" href="#hrSubmenu" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="hrSubmenu">
+                        人事系統
+                    </a>
+                    <ul class="collapse nav flex-column ms-3" id="hrSubmenu">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/backend/hr">員工管理</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/backend/hr/grades">勞保分級表</a>
+                        </li>
+                    </ul>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/inventory-system">進銷存系統</a>
@@ -116,6 +126,22 @@
         $(document).ready(function () {
             $('#sidebarToggle').on('click', function () {
                 $('#sidebar, #content').toggleClass('active');
+            });
+
+            // 处理子菜单的展开和收缩
+            $('.dropdown-toggle').on('click', function (e) {
+                e.preventDefault();
+                $(this).next('.collapse').collapse('toggle');
+            });
+
+            // 根据当前页面 URL 激活相应的菜单项
+            var currentUrl = window.location.pathname;
+            $('.nav-link').each(function () {
+                if ($(this).attr('href') === currentUrl) {
+                    $(this).addClass('active');
+                    $(this).parents('.collapse').addClass('show');
+                    $(this).parents('.nav-item').find('.dropdown-toggle').attr('aria-expanded', 'true');
+                }
             });
         });
     </script>
