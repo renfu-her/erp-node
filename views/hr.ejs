@@ -1,0 +1,42 @@
+<% layout('layouts/layout') %>
+<h1>人事管理</h1>
+
+<!-- 新增員工表單 -->
+<h2>新增員工</h2>
+<form action="/hr/add" method="POST">
+    <input type="text" name="name" placeholder="姓名" required>
+    <input type="text" name="position" placeholder="職位" required>
+    <button type="submit">新增</button>
+</form>
+
+<!-- 員工列表 -->
+<h2>員工列表</h2>
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>姓名</th>
+            <th>職位</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% employees.forEach(function(employee) { %>
+            <tr>
+                <td><%= employee.id %></td>
+                <td><%= employee.name %></td>
+                <td><%= employee.position %></td>
+                <td>
+                    <form action="/hr/edit/<%= employee.id %>" method="POST" style="display:inline;">
+                        <input type="text" name="name" value="<%= employee.name %>" required>
+                        <input type="text" name="position" value="<%= employee.position %>" required>
+                        <button type="submit">編輯</button>
+                    </form>
+                    <form action="/hr/delete/<%= employee.id %>" method="POST" style="display:inline;">
+                        <button type="submit">刪除</button>
+                    </form>
+                </td>
+            </tr>
+        <% }); %>
+    </tbody>
+</table>
